@@ -6,6 +6,11 @@ import { service } from "../controller/service.js";
 import { portfolio } from "../controller/portfolio.js";
 import { contact,usercontact } from "../controller/contact.js";
 const route = express.Router();
+const express = require('express');
+const router = express.Router();
+router.get('/', (req, res) => {
+  res.render('index'); // replace 'index' with your main EJS view name
+});
 
 route.get('/',home);
 route.get('/about',about);
