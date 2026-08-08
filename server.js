@@ -1,32 +1,36 @@
-import'dotenv/config';
-import express from "express";
-import route from "./routes/route.js";
-import connectDB from "./db/db.js";
-import path from 'path';
-import bodyparser from "body-parser";
+require('dotenv').config();
 const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+
+// Import local modules using CommonJS (require)
+const route = require('./routes/route');
+const connectDB = require('./db/db');
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
-//database connection
+// Database connection
 connectDB(process.env.MONGO_URI);
 
-// body parser
-app.use(bodyparser.urlencoded())
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+// Setup EJS template engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-//setup ejs template
+// Setup static files folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('view engine','ejs');
-app.set('views', path.join(__dirname, 'views')); // Add this line!
+// Routes
+app.use('/', route);
 
-//setup static file
- app.use(express.static(path.join(process.cwd(),'public')));
+// Export app for Vercel serverless deployment
+module.exports = app;
 
-//route
-app.use('/',route);
-
-app.listen(port,()=>(
-console.log('Server is running at https://localhost:${port}')
-))
+// Local development listener
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
