@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 // Ensure this path exactly matches where your schema file is stored
 const contactschema = require("../models/schema.js"); 
 
-const ContactModel = mongoose.model("contacts", contactschema);
 
 // GET controller to render the contact page
 const contact = (req, res) => {
