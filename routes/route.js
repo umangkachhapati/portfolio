@@ -15,4 +15,5 @@ route.get('/portfolio',portfolio);
 route.get('/contact',contact);
 route.post('/contact',usercontact);
 
-    export default route;
+  // At the bottom of routes/route.js
+module.exports = router; // or whatever your router variable is named
