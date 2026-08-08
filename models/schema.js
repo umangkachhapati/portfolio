@@ -1,23 +1,23 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-    name:{
-        type:"String",
-        required: true
-
-    },
-    email:{
-        type:"String",
+    name: {
+        type: String,
         required: true
     },
-    subject:{
-        type:"String",
+    email: {
+        type: String,
         required: true
     },
-    message:{
-        type:"String",
+    subject: {
+        type: String,
         required: true
     },
+    message: {
+        type: String,
+        required: true
+    }
 });
 
-export default schema;
+// Compile and export the model, not just the raw schema
+module.exports = mongoose.model("Contact", schema);
