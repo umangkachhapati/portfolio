@@ -1,24 +1,17 @@
-import express from "express";
-import { home } from "../controller/home.js";
-import { about } from "../controller/about.js";
-import { resume } from "../controller/controller/resume.js";
-import { service } from "../controller/service.js";
-import { portfolio } from "../controller/portfolio.js";
-import { contact,usercontact } from "../controller/contact.js";
-const route = express.Router();
-const express = require('express');
-const router = express.Router();
-router.get('/', (req, res) => {
-  res.render('index'); // replace 'index' with your main EJS view name
-});
+const mongoose = require('mongoose');
 
-route.get('/',home);
-route.get('/about',about);
-route.get('/resume',resume);
-route.get('/service',service);
-route.get('/portfolio',portfolio);
-route.get('/contact',contact);
-route.post('/contact',usercontact);
+const connectDB = async (uri) => {
+    try {
+        if (!uri) {
+            // Throw instead of returning so the application fails immediately and visibly
+            throw new Error("MONGO_URI is not set in environment variables");
+        }
+        await mongoose.connect(uri);
+        console.log("MongoDB Connected Successfully");
+    } catch (error) {
+        console.error("MongoDB Connection Error:", error.message);
+        process.exit(1); // Stop the process if connection fails entirely
+    }
+};
 
-  // At the bottom of routes/route.js
-module.exports = router; // or whatever your router variable is named
+module.exports = connectDB;
