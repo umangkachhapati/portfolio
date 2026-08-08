@@ -5,7 +5,7 @@ import connectDB from "./db/db.js";
 import path from 'path';
 import bodyparser from "body-parser";
 const express = require('express');
-const path = require('path'); // Add this line!
+
 const app = express();
 const port = 5000;
 
@@ -17,8 +17,9 @@ app.use(bodyparser.urlencoded())
 
 
 //setup ejs template
-app.set('views','./views');
+
 app.set('view engine','ejs');
+app.set('views', path.join(__dirname, 'views')); // Add this line!
 
 //setup static file
  app.use(express.static(path.join(process.cwd(),'public')));
