@@ -1,8 +1,12 @@
 const portfolio = (req, res) => {
-    try{
+    try {
         res.render('portfolio');
-    } catch (error){
+    } catch (error) {
         console.log(error.message);
+        // Respond with a 500 error status so the browser doesn't spin endlessly
+        res.status(500).send("Internal Server Error");
     }
 };
-export {portfolio};
+
+// Use CommonJS export instead of ES Modules export
+module.exports = { portfolio };
