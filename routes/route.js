@@ -1,17 +1,21 @@
-const mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
 
-const connectDB = async (uri) => {
-    try {
-        if (!uri) {
-            // Throw instead of returning so the application fails immediately and visibly
-            throw new Error("MONGO_URI is not set in environment variables");
-        }
-        await mongoose.connect(uri);
-        console.log("MongoDB Connected Successfully");
-    } catch (error) {
-        console.error("MongoDB Connection Error:", error.message);
-        process.exit(1); // Stop the process if connection fails entirely
-    }
-};
+// Controllers (using require)
+const { home } = require('../controller/home');
+const { about } = require('../controller/about');
+const { resume } = require('../controller/resume');
+const { service } = require('../controller/service');
+const { portfolio } = require('../controller/portfolio');
+const { contact, usercontact } = require('../controller/contact');
 
-module.exports = connectDB;
+// Routes
+router.get('/', home);
+router.get('/about', about);
+router.get('/resume', resume);
+router.get('/service', service);
+router.get('/portfolio', portfolio);
+router.get('/contact', contact);
+router.post('/contact', usercontact);
+
+module.exports = router;
