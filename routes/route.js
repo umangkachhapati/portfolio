@@ -4,7 +4,7 @@ const router = express.Router();
 // Controllers (using require)
 const { home } = require('../controller/home');
 const { about } = require('../controller/about');
-const { resume } = require('../controller/resume');
+const { resume } = require('../controller/controller/resume');
 const { service } = require('../controller/service');
 const { portfolio } = require('../controller/portfolio');
 const { contact, usercontact } = require('../controller/contact');
