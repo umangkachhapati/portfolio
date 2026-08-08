@@ -1,21 +1,15 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
-const connectDB =async(DATABASEURL)=>{
-    try{
-        const dbOption={
-            dbname: 'portfolio'
-        }
-        const response =await mongoose.connect(DATABASEURL,dbOption);
-        if(response){
-            console.log("Database connnected successfully")
-        } else{
-            console.log("Database not connected!")
-        }
+const connectDB = async (uri) => {
+  try {
+    if (!uri) {
+      throw new Error("MONGO_URI is missing from environment variables!");
     }
-     catch(error) {
-        console.log(error.message)
-    }
-}
+    await mongoose.connect(uri);
+    console.log("MongoDB Connected Successfully");
+  } catch (error) {
+    console.error("MongoDB Connection Error:", error.message);
+  }
+};
 
-// At the bottom of db/db.js
 module.exports = connectDB;
