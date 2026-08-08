@@ -1,8 +1,12 @@
 const service = (req, res) => {
-    try{
+    try {
         res.render('service');
-    } catch (error){
+    } catch (error) {
         console.log(error.message);
+        // Send a response so the user's browser doesn't hang
+        res.status(500).send("Internal Server Error");
     }
 };
-export {service};
+
+// Use CommonJS export instead of ES Modules export
+module.exports = { service };
