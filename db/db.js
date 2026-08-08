@@ -17,4 +17,5 @@ const connectDB =async(DATABASEURL)=>{
     }
 }
 
-export default connectDB;
+// At the bottom of db/db.js
+module.exports = connectDB;
